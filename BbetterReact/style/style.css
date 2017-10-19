@@ -1,0 +1,16 @@
+.test{
+  color:red;
+}
+
+.navbar, .margin-botton{
+  margin-bottom: 1em;
+}
+
+.has-danger .control-label,
+.has-danger .help-block,
+.has-danger .form-control,
+.has-danger .text-help,
+.has-danger .form-control {
+  border-color:#d9534f;
+  color: #d9534f;
+}

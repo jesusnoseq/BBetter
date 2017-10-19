@@ -1,0 +1,71 @@
+import _ from 'lodash';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {Field, reduxForm} from 'redux-form';
+import {dateToString, isPastDate, isFutureDate} from '../utils/date_utils';
+import {createPurpose} from '../actions';
+
+class NewPurpose extends Component{
+
+  renderTextAreaField(field){
+    const {meta: {touched, error}} = field;
+    const fieldDivClassName=`form-group ${touched && error?'has-danger':''}`;
+
+    return (
+      <div className={fieldDivClassName}>
+        <textarea
+          className="form-control"
+          rows={field.rows}
+          placeholder={field.placeholder}
+          {...field.input}
+        />
+        {/*<div className="text-help">{touched? error: ''}</div>*/}
+      </div>
+    );
+  }
+
+  onFormSubmit(values){
+    values.date=this.props.form;
+    console.log("sending Values ",values);
+    this.props.createPurpose(values, ((data) => {
+      console.log('Purpose created', data);
+      this.props.reset();
+    }).bind(this));
+  }
+
+  renderAddForm(){
+    const {handleSubmit} = this.props;
+
+    return (
+      <form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
+        <Field
+          name='purposeDescription'
+          rows='3'
+          placeholder='Your new purpose'
+          component={this.renderTextAreaField}
+        />
+        <button type='submit' className='btn btn-primary btn-lg btn-block'>Let's do this!</button>
+      </form>
+    );
+  }
+
+  render(){
+    return this.renderAddForm();
+  }
+}
+
+function validate(values){
+  const errors={};
+  if(!values.purposeDescription){
+    errors.purposeDescription='Enter a description';
+  }
+  return errors;
+}
+
+export default reduxForm({
+  form: 'PostsNewPurpose',
+  validate
+})(
+  connect(null,{createPurpose})(NewPurpose)
+);
