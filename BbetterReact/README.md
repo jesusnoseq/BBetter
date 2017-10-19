@@ -1,3 +1,10 @@
-# BeBetter
-App made to learn react and spring boot
+# Frontend
+Made with React
 
+## TODO
+- Chai tests
+- Animations
+- Delete purposes
+- Yearly, monthly and weekly purposes
+- Combo counter
+- Tags
