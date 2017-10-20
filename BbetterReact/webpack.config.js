@@ -5,7 +5,7 @@ module.exports = {
   output: {
     path: __dirname,
     publicPath: '/',
-    filename: '../BbetterSpring/src/main/resources/static/bundle.js'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [{

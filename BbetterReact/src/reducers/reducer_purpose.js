@@ -15,20 +15,18 @@ export default function(state={},action){
 
   switch (action.type) {
     case FETCH_PURPOSES:
-      console.log(action.payload.data);
       const purposes = _.groupBy(action.payload.data, 'date');
-      console.log(purposes);
-      return purposes;
-      //return _.mapKeys(action.payload.data,'date');
+      const newState= {...state, ...purposes };
+      return newState;
     case CREATE_PURPOSE:
-      const purpose=action.payload.data;
+      /*const purpose=action.payload.data;
       const newState= {...state };
       if(newState[purpose.date]){
         newState[purpose.date]=[...newState[purpose.date],purpose];
       }else{
         newState[purpose.date]=[purpose];
       }
-      return newState;
+      return newState;*/
 
       //const newState= {...state };
       //newState[post.id]=post;

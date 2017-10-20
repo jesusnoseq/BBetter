@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {fetchPurposes} from '../actions';
 
 import DailyPurpose from './daily_purpose';
 import MonthlyPurpose from './montly_purpose';
@@ -80,4 +79,4 @@ class ThreeDaysView extends Component{
 }
 
 
-export default connect(null,{fetchPurposes})(ThreeDaysView);
+export default connect(null,null)(ThreeDaysView);

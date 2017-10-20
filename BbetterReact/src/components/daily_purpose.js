@@ -3,10 +3,18 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {dateToString, isPastDate, isFutureDate} from '../utils/date_utils';
 import NewPurpose from './new_purpose';
-//import {fetchPost, deletePost} from '../actions';
+
+import {fetchPurposes} from '../actions';
 
 class DailyPurpose extends Component{
 
+  componentWillReceiveProps(nextProps){
+    const {date}=this.props;
+    if(!this.props.purposes){
+      this.props.fetchPurposes(date.getFullYear(),date.getMonth()+1,date.getDate());
+    }
+
+  }
 
 
   renderPurposes(){
@@ -45,7 +53,7 @@ class DailyPurpose extends Component{
 
 
 function mapStateToProps(state,ownProps){
-  return {purposes: state.purposes[dateToString(ownProps.date)]};
+  return {purposes: state.purposes[dateToString(ownProps.date,'-')]};
 }
 
-export default connect(mapStateToProps)(DailyPurpose);
+export default connect(mapStateToProps, {fetchPurposes})(DailyPurpose);
