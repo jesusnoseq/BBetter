@@ -15,6 +15,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.http.ResponseEntity.HeadersBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,14 +87,14 @@ public class PurposesController {
 	
 	
 		
-	@PostMapping(path="/api/purposes/")
+	@PostMapping(path="/api/purposes")
 	public ResponseEntity<Purpose> createPurpose(@Valid @RequestBody Purpose purpose){
 		purpose.setId(null);
 		Purpose p=purposeRepository.save(purpose);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
 		
-		return ResponseEntity.created(location).build();
+		return  ResponseEntity.created(location).body(p);
 	}
 	
 }
