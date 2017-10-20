@@ -40,11 +40,11 @@ class DailyPurpose extends Component{
     const {date}=this.props;
 
     return (
-      <div><h3><span className='text-muted'>{this.props.date.getMonth()}/</span>{date.getDate()}</h3>
+      <div><h3><span className='text-muted'>{this.props.date.getMonth()+1}/</span>{date.getDate()}</h3>
         <ul className='list-group'>
           {this.renderPurposes()}
         </ul>
-        {isPastDate(date)? null : <NewPurpose form={dateToString(date)}/>}
+        {isPastDate(date)? null : <NewPurpose form={dateToString(date,'-')}/>}
         {/*{isPastDate(date)? null : <button type='button' className='btn btn-outline-primary btn-lg btn-block'>+</button>}*/}
       </div>
     );

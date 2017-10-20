@@ -18,7 +18,7 @@ export function fetchPurposes (year, month, day) {
 
 
 export function createPurpose (values, callback) {
-  const request = axios.post(`${API_URL}/purposes`, values).then(callback);
+  const request = axios.post(`${API_URL}/purposes`, values);//.then(callback);
   return {
     type: CREATE_PURPOSES,
     payload: request

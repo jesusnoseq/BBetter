@@ -1,41 +1,26 @@
 
 import _ from 'lodash';
-import {FETCH_PURPOSES, CREATE_PURPOSE} from '../actions';
+import {FETCH_PURPOSES, CREATE_PURPOSES, UPDATE_PURPOSES, DELETE_PURPOSES} from '../actions';
 
-const mockdata=[
-  {id:1, description: 'Desing app',completed:true, date:'20171014'},
-  {id:11, description: 'Do this app',completed:true, date:'20171015'},
-  {id:22, description: 'Do this app backend',completed:true, date:'20171015'},
-  {id:33, description: 'Send CV',completed:false, date:'20171016'}
-];
-
-
-
-export default function(state={},action){
-
+export default function (state = {}, action){
   switch (action.type) {
     case FETCH_PURPOSES:
       const purposes = _.groupBy(action.payload.data, 'date');
-      const newState= {...state, ...purposes };
-      return newState;
-    case CREATE_PURPOSE:
-      /*const purpose=action.payload.data;
-      const newState= {...state };
-      if(newState[purpose.date]){
-        newState[purpose.date]=[...newState[purpose.date],purpose];
+      const mergedState= {...state, ...purposes };
+      return mergedState;
+    case CREATE_PURPOSES:
+      const newPurpose = action.payload.data;
+      const {date}=newPurpose;
+      if(state[date]){
+        const newDay={[date]:[...state[newPurpose.date],newPurpose]};
+        return {...(_.omit(state, date)), ...newDay};
       }else{
-        newState[purpose.date]=[purpose];
+          return {...state, [newPurpose.date]:[newPurpose]};
       }
-      return newState;*/
-
-      //const newState= {...state };
-      //newState[post.id]=post;
-
-      //return newState;
-    //case DELETE_POST:
-    //  return _.omit(state, action.payload);
-      //if array
-      //_.reject(state,post=>post===action.payload);
+    case UPDATE_PURPOSES:
+      return state;
+    case DELETE_PURPOSES:
+      return state;
     default:
       return state;
   }

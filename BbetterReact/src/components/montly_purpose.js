@@ -10,7 +10,7 @@ class MonthlyPurpose extends Component{
   }
 
   render(){
-    const month = this.props.date.getMonth();
+    const month = this.props.date.getMonth()+1;
     return (<div className='center-block'><h2 className='text-center'><span className='text-muted'>Month:</span> {month}</h2></div>);
   }
 }

@@ -27,11 +27,15 @@ class NewPurpose extends Component{
 
   onFormSubmit(values){
     values.date=this.props.form;
-    console.log("sending Values ",values);
-    this.props.createPurpose(values, ((data) => {
-      console.log('Purpose created', data);
-      this.props.reset();
-    }).bind(this));
+    values.completed=false;
+    this.props.createPurpose(values);
+    /*  values
+      , ((data) => {
+        if(data.status===201){
+          this.props.reset();
+        }
+      }).bind(this));*/
+    this.props.reset();
   }
 
   renderAddForm(){
@@ -40,7 +44,7 @@ class NewPurpose extends Component{
     return (
       <form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
         <Field
-          name='purposeDescription'
+          name='description'
           rows='3'
           placeholder='Your new purpose'
           component={this.renderTextAreaField}
@@ -57,8 +61,8 @@ class NewPurpose extends Component{
 
 function validate(values){
   const errors={};
-  if(!values.purposeDescription){
-    errors.purposeDescription='Enter a description';
+  if(!values.description){
+    errors.description='Enter a description';
   }
   return errors;
 }
