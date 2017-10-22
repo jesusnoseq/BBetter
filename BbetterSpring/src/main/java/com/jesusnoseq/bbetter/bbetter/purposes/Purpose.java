@@ -26,7 +26,6 @@ public class Purpose {
 	@GeneratedValue
 	@Getter @Setter Long id;
 	
-	@FutureOrPresent
 	@Column(name="purpose_date")
 	@Getter @Setter LocalDate date;
 	
