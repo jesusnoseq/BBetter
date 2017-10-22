@@ -7,11 +7,16 @@ import NewPurpose from './new_purpose';
 import {fetchPurposes} from '../actions';
 
 class DailyPurpose extends Component{
+  constructor(props){
+    super(props);
+    this.state={randn:Math.floor((Math.random() * 100))};
+  }
 
   componentWillReceiveProps(nextProps){
     const {date}=this.props;
     if(!this.props.purposes){
       this.props.fetchPurposes(date.getFullYear(),date.getMonth()+1,date.getDate());
+
     }
 
   }
@@ -38,21 +43,22 @@ class DailyPurpose extends Component{
 
   render(){
     const {date}=this.props;
+    const {context}=this.props;
 
     return (
       <div><h3><span className='text-muted'>{this.props.date.getMonth()+1}/</span>{date.getDate()}</h3>
         <ul className='list-group'>
           {this.renderPurposes()}
         </ul>
-        {isPastDate(date)? null : <NewPurpose form={dateToString(date,'-')}/>}
-        {/*{isPastDate(date)? null : <button type='button' className='btn btn-outline-primary btn-lg btn-block'>+</button>}*/}
+        {isPastDate(date)? null : <NewPurpose form={context} />}
+        {/*{isPastDate(date)? null : <button type='button' className='btn btn-outline-primary btn-lg btn-block'>+</button>}   date={dateToString(date,'-')} */}
       </div>
     );
   }
 }
 
 
-function mapStateToProps(state,ownProps){
+function mapStateToProps(state, ownProps) {
   return {purposes: state.purposes[dateToString(ownProps.date,'-')]};
 }
 

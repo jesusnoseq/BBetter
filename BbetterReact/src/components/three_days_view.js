@@ -24,52 +24,54 @@ class ThreeDaysView extends Component{
 
   updateState(myProps){
     let currentDate = new Date();
-    let {day, month, year}=myProps.match.params;
-    const inputDate = constructDate(year,month,day);
+    let {day, month, year} = myProps.match.params;
+    const inputDate = constructDate(year, month, day);
 
     if (day && month && year && inputDate) {
-      currentDate=inputDate;
+      currentDate = inputDate;
     }else{
       day = currentDate.getDate(),
       month = currentDate.getMonth()+1, //January is 0!
       year = currentDate.getFullYear();
     }
 
-    this.setState({year,month,day,date:currentDate});
+    this.setState({year, month, day, date: currentDate});
 
-        //this.props.fetchPurposes(year, month, day);
+    //this.props.fetchPurposes(year, month, day);
   }
 
 
   render(){
-    const {year, month, day, date}=this.state;
-    const previusDay=addDays(date,-1);
-    const nextDay=addDays(date,+1);
-    const linkToPreviusDay=`/${dateToString(previusDay, '/')}`;
-    const linkToNextDay=`/${dateToString(nextDay, '/')}`;
+    const {year, month, day, date} = this.state;
+
+    const previousDay = addDays(date, -1);
+    const nextDay = addDays(date, +1);
+
+    const linkToPreviousDay = `/${dateToString(previousDay, '/')}`;
+    const linkToNextDay = `/${dateToString(nextDay, '/')}`;
 
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12 col-lg-12 margin-botton'>
-            <MonthlyPurpose date={date}/>
+            <MonthlyPurpose date={date} />
           </div>
           <div className='col-sm-12 col-lg-4'>
-            <DailyPurpose date={previusDay}/>
+            <DailyPurpose date={previousDay} context='previousDay' />
           </div>
           <div className='col-sm-12 col-lg-4'>
-            <DailyPurpose date={date}/>
+            <DailyPurpose date={date} context='currentDay' />
           </div>
           <div className='col-sm-12 col-lg-4'>
-            <DailyPurpose date={nextDay}/>
+            <DailyPurpose date={nextDay} context='nextDay' />
           </div>
         </div>{/**/}
         <div className='row'>
           <div className='col-sm-6'>
-            <Link to={linkToPreviusDay} className='btn btn-default float-left'>Previous</Link>
+            <Link to={linkToPreviousDay} className='btn btn-default float-left'>Previous</Link>
           </div>
-          <div className="col-sm-6">
-            <Link to={linkToNextDay} className="btn btn-default float-right">Next</Link>
+          <div className='col-sm-6'>
+            <Link to={linkToNextDay} className='btn btn-default float-right'>Next</Link>
           </div>
         </div>
       </div>
@@ -79,4 +81,4 @@ class ThreeDaysView extends Component{
 }
 
 
-export default connect(null,null)(ThreeDaysView);
+export default connect(null, null)(ThreeDaysView);

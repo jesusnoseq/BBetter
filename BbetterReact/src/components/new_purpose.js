@@ -7,7 +7,6 @@ import {dateToString, isPastDate, isFutureDate} from '../utils/date_utils';
 import {createPurpose} from '../actions';
 
 class NewPurpose extends Component{
-
   renderTextAreaField(field){
     const {meta: {touched, error}} = field;
     const fieldDivClassName=`form-group ${touched && error?'has-danger':''}`;
