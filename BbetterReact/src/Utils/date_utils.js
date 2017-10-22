@@ -17,7 +17,7 @@ const localeDays = {
 
 
 export function addDays(date,daysToAdd){
-  let outDate=new Date();
+  let outDate=new Date(date);
   outDate.setDate(date.getDate()+daysToAdd);
   return outDate;
 }
