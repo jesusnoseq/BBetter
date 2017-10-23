@@ -25,7 +25,7 @@ class NewPurpose extends Component{
   }
 
   onFormSubmit(values){
-    values.date=this.props.form;
+    values.date=dateToString(this.props.date, '-');
     values.completed=false;
     this.props.createPurpose(values);
     /*  values

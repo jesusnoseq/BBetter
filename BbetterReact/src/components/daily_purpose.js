@@ -9,14 +9,12 @@ import {fetchPurposes} from '../actions';
 class DailyPurpose extends Component{
   constructor(props){
     super(props);
-    this.state={randn:Math.floor((Math.random() * 100))};
   }
 
   componentWillReceiveProps(nextProps){
     const {date}=this.props;
     if(!this.props.purposes){
       this.props.fetchPurposes(date.getFullYear(),date.getMonth()+1,date.getDate());
-
     }
 
   }
@@ -50,7 +48,7 @@ class DailyPurpose extends Component{
         <ul className='list-group'>
           {this.renderPurposes()}
         </ul>
-        {isPastDate(date)? null : <NewPurpose form={context} />}
+        {isPastDate(date)? null : <NewPurpose form={context} date={date} />}
         {/*{isPastDate(date)? null : <button type='button' className='btn btn-outline-primary btn-lg btn-block'>+</button>}   date={dateToString(date,'-')} */}
       </div>
     );
