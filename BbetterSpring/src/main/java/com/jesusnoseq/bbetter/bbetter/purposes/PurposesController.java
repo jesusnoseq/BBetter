@@ -72,6 +72,17 @@ public class PurposesController {
 		return resource;
 	}
 	
+	
+	@PostMapping(path="/api/purposes")
+	public ResponseEntity<Purpose> createPurpose(@Valid @RequestBody Purpose purpose){
+		purpose.setId(null);
+		Purpose p=purposeRepository.save(purpose);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
+		
+		return  ResponseEntity.created(location).body(p);
+	}
+	
 	@PutMapping("/api/purposes/{id}")
 	public ResponseEntity<Object> updatePurpose(
 			@PathVariable long id,
@@ -84,17 +95,5 @@ public class PurposesController {
 		
 		return ResponseEntity.accepted().build();
 	}
-	
-	
-		
-	@PostMapping(path="/api/purposes")
-	public ResponseEntity<Purpose> createPurpose(@Valid @RequestBody Purpose purpose){
-		purpose.setId(null);
-		Purpose p=purposeRepository.save(purpose);
-		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
-		
-		return  ResponseEntity.created(location).body(p);
-	}
-	
+
 }
