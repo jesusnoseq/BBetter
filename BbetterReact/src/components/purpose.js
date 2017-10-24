@@ -7,9 +7,8 @@ class Purpose extends Component{
 
 
   toggleCheckboxChange(event){
-    event.preventDefault();
     let modPurpose = Object.assign({}, this.props.data);
-    modPurpose.completed=event.target.checked;
+    modPurpose.completed = event.target.checked;
     this.props.updatePurpose(modPurpose);
   }
 
@@ -20,11 +19,11 @@ class Purpose extends Component{
     const itemClassName=`list-group-item d-flex justify-content-between align-items-center ${completed?'list-group-item-success':''}`;
     return (
       <li key={id} className={itemClassName}>
-          {description}
-          <span className='badge badge-default badge-pill text-secondary'>
-              <input type='checkbox' value='completed' defaultChecked={completed} disabled={!isFuture}
-                onChange={this.toggleCheckboxChange.bind(this)} />
-          </span>
+        {description}
+        <span className='badge badge-default badge-pill text-secondary'>
+          <input type='checkbox' value='completed' defaultChecked={completed} disabled={!isFuture}
+            onChange={this.toggleCheckboxChange.bind(this)} />
+        </span>
       </li>
     );
   }
