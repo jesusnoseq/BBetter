@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {dateToString, isPastDate, isFutureDate} from '../utils/date_utils';
+import {dateToString, isPastDate, isFutureOrPresentDate} from '../utils/date_utils';
 import NewPurpose from './new_purpose';
-
+import Purpose from './purpose';
 import {fetchPurposes} from '../actions';
 
 class DailyPurpose extends Component{
@@ -19,20 +19,14 @@ class DailyPurpose extends Component{
 
   }
 
+  toggleCheckboxChange (event){
+    console.log(event);
+  }
 
   renderPurposes(){
-    const isFuture = isFutureDate(this.props.date);
-
     return _.map(this.props.purposes, (p) => {
-      //const disabled=isPast?'':'disabled';
-      const itemClassName=`list-group-item d-flex justify-content-between align-items-center ${p.completed?'list-group-item-success':''}`;
       return (
-        <li key={p.id} className={itemClassName}>
-            {p.description}
-            <span className='badge badge-default badge-pill text-secondary'>
-                <input type='checkbox' value='completed' defaultChecked={p.completed} disabled={isFuture} />
-            </span>
-        </li>
+        <Purpose key={p.id} data={p} />
       );
     });
   }
@@ -49,7 +43,6 @@ class DailyPurpose extends Component{
           {this.renderPurposes()}
         </ul>
         {isPastDate(date)? null : <NewPurpose form={context} date={date} />}
-        {/*{isPastDate(date)? null : <button type='button' className='btn btn-outline-primary btn-lg btn-block'>+</button>}   date={dateToString(date,'-')} */}
       </div>
     );
   }

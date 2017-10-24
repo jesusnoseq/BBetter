@@ -36,8 +36,6 @@ class ThreeDaysView extends Component{
     }
 
     this.setState({year, month, day, date: currentDate});
-
-    //this.props.fetchPurposes(year, month, day);
   }
 
 

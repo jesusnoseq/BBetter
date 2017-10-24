@@ -19,7 +19,6 @@ class NewPurpose extends Component{
           placeholder={field.placeholder}
           {...field.input}
         />
-        {/*<div className="text-help">{touched? error: ''}</div>*/}
       </div>
     );
   }
@@ -28,12 +27,7 @@ class NewPurpose extends Component{
     values.date=dateToString(this.props.date, '-');
     values.completed=false;
     this.props.createPurpose(values);
-    /*  values
-      , ((data) => {
-        if(data.status===201){
-          this.props.reset();
-        }
-      }).bind(this));*/
+
     this.props.reset();
   }
 
