@@ -1,6 +1,5 @@
 
 
-
 const localeMonths = {
     en: {
        month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -15,13 +14,11 @@ const localeDays = {
     }
 };
 
-
 export function addDays(date,daysToAdd){
   let outDate=new Date(date);
   outDate.setDate(date.getDate()+daysToAdd);
   return outDate;
 }
-
 
 export function deconstrucDate(date){
   day = currentDay.getDate(),
@@ -35,13 +32,6 @@ export function constructDate(year,month,day){
   return isNaN(inDate.getTime())? null : inDate;
 }
 
-
-/*export function isPast(year, month, day){
-  const today = ( new Date() ).setHours(0,0,0,0);
-  const inputDate = new Date(month+"/"+day+"/"+year);
-  return today > inputDate;
-}*/
-
 export function isPastDate(inDate){
   const today = ( new Date() ).setHours(0,0,0,0);
   return today > inDate;
@@ -50,8 +40,14 @@ export function isPastDate(inDate){
 
 export function isFutureDate(inDate){
   const today = ( new Date() ).setHours(0,0,0,0);
-  //inDate.setHours(0,0,0,0);
   return today < inDate;
+}
+
+export function isFutureOrPresentDate(inDate){
+  const today = new Date().setHours(0,0,0,0);
+  const inDateDay = new Date(inDate).setHours(0,0,0,0);
+  //console.log(inDate.getDate()+"inDateDay  ",today," vs ",inDateDay," -- ",(today <= inDateDay));
+  return today <= inDateDay;
 }
 
 export function dateToString(date,separator=""){
