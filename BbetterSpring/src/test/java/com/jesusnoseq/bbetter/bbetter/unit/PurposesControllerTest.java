@@ -60,7 +60,7 @@ public class PurposesControllerTest {
     public void testCORS() throws Exception {
     	mvc.perform(get("/api/purposes/all"))
                 .andExpect(header().string("Access-Control-Allow-Origin", "*"))
-                .andExpect(header().string("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE"))
+                .andExpect(header().string("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT"))
                 .andExpect(header().string("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me"))
                 .andExpect(header().string("Access-Control-Max-Age", "3600"));
     }
