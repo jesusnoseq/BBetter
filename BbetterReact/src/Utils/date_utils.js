@@ -55,7 +55,9 @@ export function isFutureDate(inDate){
 }
 
 export function dateToString(date,separator=""){
-  return date.getFullYear()+separator+(date.getMonth()+1)+separator+date.getDate();
+  return date.getFullYear()+separator
+    +(date.getMonth()>=9 ? '' : '0')+(date.getMonth()+1)+separator
+    +(date.getDate()>9 ? '' : '0')+(date.getDate());
 }
 
 export function getMonthName (lang = 'en') {
