@@ -52,6 +52,16 @@ class ThreeDaysView extends Component{
 
     return (
       <div className='container'>
+
+        <div className='row'>
+          <div className='col-sm-6'>
+            <Link to={linkToPreviousDay} className='btn btn-default float-left'>Previous</Link>
+          </div>
+          <div className='col-sm-6'>
+            <Link to={linkToNextDay} className='btn btn-default float-right'>Next</Link>
+          </div>
+        </div>
+
         <div className='row'>
           <div className='col-sm-12 col-lg-12 margin-botton'>
             <MonthlyPurpose date={date} />
@@ -66,14 +76,7 @@ class ThreeDaysView extends Component{
             <DailyPurpose date={nextDay} context='nextDay' />
           </div>
         </div>{/**/}
-        <div className='row'>
-          <div className='col-sm-6'>
-            <Link to={linkToPreviousDay} className='btn btn-default float-left'>Previous</Link>
-          </div>
-          <div className='col-sm-6'>
-            <Link to={linkToNextDay} className='btn btn-default float-right'>Next</Link>
-          </div>
-        </div>
+
       </div>
     );
   }
