@@ -91,6 +91,7 @@ public class PurposesController {
 		if(!purposeOpt.isPresent()){
 			throw new PurposeNotFoundException("Purpose id "+id);
 		}
+		purpose.setId(id);
 		Purpose p=purposeRepository.save(purpose);
 		
 		return ResponseEntity.accepted().build();
