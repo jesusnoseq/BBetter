@@ -9,4 +9,7 @@ var stripLoader = {
 
 devConfig.module.loaders.push(stripLoader);
 
+// Where to save bundle.js file
+devConfig.module.output.path = __dirname;
+
 module.exports = devConfig;
