@@ -22,6 +22,7 @@ export default function (state = {}, action){
       const updatePurpose = action.purpose;
       const updateState = _.cloneDeep(state);
       const oldPurpose=_.find(updateState[updatePurpose.date],{'id':updatePurpose.id});
+      Object.assign(oldPurpose, updatePurpose);
       return updateState;
     case DELETE_PURPOSE:
       return state;
