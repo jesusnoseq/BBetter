@@ -2,7 +2,7 @@ var WebpackStripLoader = require('strip-loader');
 var devConfig = require('./webpack.config.js');
 
 // Where to save bundle.js file
-devConfig.module.output.path = __dirname;
+devConfig.output.path ="../BbetterSpring/src/main/resources/static";
 
 var stripLoader = {
  test: [/\.js$/, /\.es6$/],
