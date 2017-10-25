@@ -60,3 +60,9 @@ export function getMonthName (lang = 'en') {
   lang = lang && (lang in localeMonths.locale) ? lang : 'en';
   return localeMonths[lang].month_names[this.getMonth()];
 }
+
+
+export function getDayName (lang = 'en') {
+  lang = lang && (lang in localeDays.locale) ? lang : 'en';
+  return localeDays[lang].day_names[this.getDay()];
+}
