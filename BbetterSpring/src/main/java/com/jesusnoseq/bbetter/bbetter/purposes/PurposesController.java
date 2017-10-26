@@ -13,18 +13,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
-import org.springframework.http.ResponseEntity.HeadersBuilder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
@@ -97,4 +93,14 @@ public class PurposesController {
 		return ResponseEntity.accepted().build();
 	}
 
+	@DeleteMapping("/api/purposes/{id}")
+	public ResponseEntity<Purpose> deletePurpose(@PathVariable long id){
+		Optional<Purpose> purposeOpt = purposeRepository.findById(id);
+		if(!purposeOpt.isPresent()){
+			throw new PurposeNotFoundException("Purpose id "+id);
+		}
+		purposeRepository.deleteById(id);
+		
+		return ResponseEntity.accepted().build();
+	}
 }
