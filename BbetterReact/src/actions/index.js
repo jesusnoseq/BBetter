@@ -34,3 +34,14 @@ export function updatePurpose (values, callback) {
     purpose: values
   };
 }
+
+
+
+export function deletePurpose (id, callback) {
+  const request = axios.delete(`${API_URL}/purposes/${id}`); //.then(callback);
+  return {
+    type: DELETE_PURPOSE,
+    payload: request,
+    purposeId: id
+  };
+}
