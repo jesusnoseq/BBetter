@@ -32,4 +32,4 @@ class Purpose extends Component{
 }
 
 
-export default connect(null,{updatePurpose})(Purpose);
+export default connect(null, {updatePurpose})(Purpose);
