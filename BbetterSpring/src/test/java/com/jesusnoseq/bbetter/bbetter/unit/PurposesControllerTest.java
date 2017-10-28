@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,14 @@ public class PurposesControllerTest {
 	@MockBean
 	private PurposesController purposesController;
 	
+	
+
+	public void prepareMockData(){
+		Purpose purpose= new Purpose(0l,LocalDate.now(),"TEST",false);
+		List<Purpose> allPurposes=Collections.singletonList(purpose);
+	}
+	
+	
 	@Test
 	public void getAllPurposesTest() throws Exception{
 		Purpose purpose= new Purpose(0l,LocalDate.now(),"TEST",false);
@@ -49,11 +58,29 @@ public class PurposesControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$", hasSize(1)))
 			.andExpect(jsonPath("$[0].description",is(purpose.getDescription())));
+		
 	    verify(purposesController, times(1)).retreiveAllPurposes();
 	    verifyNoMoreInteractions(purposesController);
 	}
 	
-
+	@Test
+	public void getIdPurposesTest() throws Exception{
+		Purpose purpose= new Purpose(1l,LocalDate.now(),"TEST",false);
+		List<Purpose> allPurposes=Collections.singletonList(purpose);
+		
+		given(purposesController.retreiveAllPurposes()).willReturn(allPurposes);
+		
+		MockHttpServletRequestBuilder request = get("/api/purposes/1").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request)
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$", hasSize(1)))
+			.andExpect(jsonPath("$[0].description",is(purpose.getDescription())));
+		
+	    verify(purposesController, times(1)).retreiveAllPurposes();
+	    verifyNoMoreInteractions(purposesController);
+	}
+	
 
 
     @Test
