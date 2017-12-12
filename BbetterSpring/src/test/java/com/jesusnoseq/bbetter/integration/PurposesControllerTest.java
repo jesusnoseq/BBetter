@@ -1,4 +1,4 @@
-package com.jesusnoseq.bbetter.bbetter.unit;
+package com.jesusnoseq.bbetter.integration;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -79,6 +79,7 @@ public class PurposesControllerTest {
 		
 	    verify(purposesController, times(1)).retreiveAllPurposes();
 	    verifyNoMoreInteractions(purposesController);
+
 	}
 	
 
