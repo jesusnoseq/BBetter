@@ -10,5 +10,6 @@ public class BbetterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BbetterApplication.class, args);
+		
 	}
 }
